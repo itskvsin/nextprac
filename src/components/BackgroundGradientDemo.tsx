@@ -2,9 +2,12 @@
 import React from "react";
 import { BackgroundGradient } from "./ui/background-gradient";
 // import { IconAppWindow } from "@tabler/icons-react";
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface backgroundText{
+  text: string
+}
 
-
-export function BackgroundGradientDemo({text}) {
+export function BackgroundGradientDemo({text}: backgroundText) {
   return (
     <div className="px-10">
       <BackgroundGradient className="rounded-[22px]  p-4 sm:p-10 bg-black dark:bg-zinc-900">

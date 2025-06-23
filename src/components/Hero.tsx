@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {SpotlightPreview}  from "./Spotlight";
 import { MovingBorderDemo } from "./MovingBorder";
-import { BackgroundGradientDemo } from "./BackgroundGradientDemo";
 
 export default function HeroSection() {
   return (
