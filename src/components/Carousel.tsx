@@ -13,18 +13,14 @@ const InfiniteSingleImageCarousel = ({
   speed = 10,
   imageWidth = 400,
 }: CarouselProps) => {
-  const allImages = [...images, ...images]; // duplicate for seamless loop
+  const allImages = [...images, ...images]; // duplicate for loop
   const totalWidth = allImages.length * imageWidth;
 
   return (
-    <div
-      className="overflow-hidden w-screen mx-auto"
-      style={{ width: `${imageWidth}px` }}
-    >
-      <div className=" overflow-hidden">
+    <div className="overflow-hidden mx-auto" style={{ width: `${imageWidth * images.length}px` }}>
       <motion.div
-        className="flex gap-10"
-        animate={{ x: [-totalWidth / 2, 0] }}
+        className="flex"
+        animate={{ x: [0, -totalWidth / 2] }}
         transition={{
           x: {
             repeat: Infinity,
@@ -39,12 +35,12 @@ const InfiniteSingleImageCarousel = ({
             key={i}
             src={src}
             alt={`carousel-${i}`}
+            draggable={false}
             style={{ width: `${imageWidth}px`, height: "auto" }}
-            className="w-full object-fill rounded-xl "
+            className="object-cover rounded-xl"
           />
         ))}
       </motion.div>
-    </div>
     </div>
   );
 };
