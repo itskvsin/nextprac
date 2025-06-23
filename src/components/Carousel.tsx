@@ -1,25 +1,25 @@
 "use client";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface CarouselProps {
   images: string[];
-  speed?: number; // seconds per full cycle
-  imageWidth?: number; // width in px
+  speed?: number;      // seconds for one full scroll
+  imageWidth?: number; // in px
 }
 
 const InfiniteSingleImageCarousel = ({
   images,
-  speed = 10,
-  imageWidth = 400,
+  speed = 15,
+  imageWidth = 500,
 }: CarouselProps) => {
-  const allImages = [...images, ...images]; // duplicate for loop
+  const allImages = [...images, ...images]; // Duplicate for seamless loop
   const totalWidth = allImages.length * imageWidth;
 
   return (
-    <div className="overflow-hidden mx-auto" style={{ width: `${imageWidth * images.length}px` }}>
+    <div className="overflow-hidden mx-auto w-screen">
       <motion.div
-        className="flex"
+        className="flex gap-10"
         animate={{ x: [0, -totalWidth / 2] }}
         transition={{
           x: {
@@ -31,14 +31,21 @@ const InfiniteSingleImageCarousel = ({
         }}
       >
         {allImages.map((src, i) => (
-          <img
+          <div
             key={i}
-            src={src}
-            alt={`carousel-${i}`}
-            draggable={false}
-            style={{ width: `${imageWidth}px`, height: "auto" }}
-            className="object-cover rounded-xl"
-          />
+            style={{ width: `${imageWidth}px`, flexShrink: 0 }}
+            className="relative h-[300px]  md:h-[400px]"
+          >
+            <Image
+              src={src}
+              alt={`carousel-${i}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 500px"
+              className="object-cover rounded-xl"
+              draggable={false}
+              priority={i < images.length} // prioritize original images
+            />
+          </div>
         ))}
       </motion.div>
     </div>
